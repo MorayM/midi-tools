@@ -192,3 +192,20 @@ export function sendBankSelect(
   sendControlChange(output, channel, 32, lsb, lsbTimestamp);
 }
 
+/**
+ * Sends a MIDI All Notes Off message (CC 123)
+ * @param output - MIDI output device
+ * @param channel - MIDI channel (0-15)
+ * @param timestamp - Optional timestamp in milliseconds
+ * @throws {Error} if parameters are out of range
+ */
+export function sendAllNotesOff(
+  output: MIDIOutput,
+  channel: number,
+  timestamp?: number,
+): void {
+  validateChannel(channel);
+  // All Notes Off is CC 123 (0x7B) with value 0
+  sendControlChange(output, channel, 123, 0, timestamp);
+}
+

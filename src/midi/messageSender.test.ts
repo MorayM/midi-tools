@@ -6,6 +6,7 @@ import {
   sendPitchBend,
   sendProgramChange,
   sendBankSelect,
+  sendAllNotesOff,
 } from './messageSender';
 import { createMockMidiOutput } from './__mocks__/midiMocks';
 
@@ -253,6 +254,31 @@ describe('messageSender', () => {
 
     it('should throw error for invalid channel', () => {
       expect(() => sendBankSelect(mockOutput as unknown as MIDIOutput, 16, 0)).toThrow('Invalid MIDI channel');
+    });
+  });
+
+  describe('sendAllNotesOff', () => {
+    it('should send correct All Notes Off message', () => {
+      sendAllNotesOff(mockOutput as unknown as MIDIOutput, 0);
+      
+      expect(mockOutput.send).toHaveBeenCalledTimes(1);
+      const [data] = mockOutput.send.mock.calls[0];
+      expect(data).toEqual(new Uint8Array([0xb0, 123, 0]));
+    });
+
+    it('should handle different channels', () => {
+      sendAllNotesOff(mockOutput as unknown as MIDIOutput, 5);
+      const [data] = mockOutput.send.mock.calls[0];
+      expect(data[0]).toBe(0xb5); // 0xB0 | 5
+    });
+
+    it('should include timestamp when provided', () => {
+      sendAllNotesOff(mockOutput as unknown as MIDIOutput, 0, 1000);
+      expect(mockOutput.send).toHaveBeenCalledWith(expect.any(Uint8Array), 1000);
+    });
+
+    it('should throw error for invalid channel', () => {
+      expect(() => sendAllNotesOff(mockOutput as unknown as MIDIOutput, 16)).toThrow('Invalid MIDI channel');
     });
   });
 });

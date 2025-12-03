@@ -86,8 +86,12 @@ export function setupMidiAccessMock(mockAccess: MockMidiAccess): void {
  * Clears MIDI access mock by setting it to undefined
  */
 export function clearMidiAccessMock(): void {
+  // Clear both global.navigator and navigator to match setupMidiAccessMock
   if (global.navigator) {
     (global.navigator as { requestMIDIAccess?: unknown }).requestMIDIAccess = undefined;
+  }
+  if (typeof navigator !== 'undefined') {
+    (navigator as { requestMIDIAccess?: unknown }).requestMIDIAccess = undefined;
   }
 }
 

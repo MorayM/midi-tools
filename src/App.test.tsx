@@ -1,33 +1,31 @@
+import { describe, it, expect } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import App from './App';
 
 describe('App', () => {
   it('should render the app title', () => {
-    render(<App />);
-    expect(screen.getByText('Vite + React')).toBeInTheDocument();
+    const { container } = render(<App />);
+    expect(container.textContent).toContain('MIDI Tools');
   });
 
-  it('should render the count button with initial value', () => {
+  it('should render device selector', () => {
     render(<App />);
-    const button = screen.getByRole('button', { name: /count is 0/i });
-    expect(button).toBeInTheDocument();
+    expect(screen.getByLabelText('MIDI Device:')).toBeTruthy();
   });
 
-  it('should increment count when button is clicked', async () => {
-    const user = userEvent.setup();
+  it('should render channel selector', () => {
     render(<App />);
-    const button = screen.getByRole('button', { name: /count is 0/i });
-
-    await user.click(button);
-
-    expect(screen.getByRole('button', { name: /count is 1/i })).toBeInTheDocument();
+    expect(screen.getByLabelText('Channel:')).toBeTruthy();
   });
 
-  it('should render the HMR instruction text', () => {
+  it('should render piano keyboard', () => {
+    const { container } = render(<App />);
+    expect(container.textContent).toContain('C3');
+    expect(container.textContent).toContain('C4');
+  });
+
+  it('should render panic button', () => {
     render(<App />);
-    expect(screen.getByText(/Edit/i)).toBeInTheDocument();
-    expect(screen.getByText(/save to test HMR/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /panic/i })).toBeTruthy();
   });
 });
-

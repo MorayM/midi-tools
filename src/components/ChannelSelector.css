@@ -1,0 +1,20 @@
+.channel-selector {
+  margin-bottom: 1rem;
+}
+
+.channel-selector label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.channel-selector select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: white;
+  color: #333;
+  min-width: 100px;
+}
+
