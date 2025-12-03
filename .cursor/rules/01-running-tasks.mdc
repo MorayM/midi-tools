@@ -1,0 +1,8 @@
+---
+alwaysApply: true
+title: Running tasks
+---
+
+This file tells you how to run scripts and tests associated with the project. PNPM is the package manager and runner.
+
+- **Always** run `nvm use 22` before running any commands

@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "types": ["jest", "@testing-library/jest-dom", "node"],
+    "noEmit": false,
+    "verbatimModuleSyntax": false,
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": false
+  },
+  "include": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/setupTests.ts", "src/jest-dom.d.ts", "src/vite-env.d.ts"]
+}
+

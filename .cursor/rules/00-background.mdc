@@ -1,0 +1,12 @@
+---
+alwaysApply: true
+title: Background
+---
+
+The intention of this project is to let users send MIDI messages to external MIDI equipment from the browser using Web MIDI.
+
+## Technologies
+
+- Node 22.14.0
+- React 19
+- PNPM 10.11
